@@ -23,8 +23,8 @@ public class PlayerTouchInput : MonoBehaviour, PlayerInput
         {
             Vector2 currentPosition = Input.mousePosition.normalized;
             
-            Swipe(currentPosition.x, _lastPosition.x, false, -1, currentPosition);
-            Swipe(_lastPosition.x, currentPosition.x, true, 1, currentPosition);
+            Swipe(currentPosition.x, _lastPosition.x, false, 1, currentPosition);
+            Swipe(_lastPosition.x, currentPosition.x, true, -1, currentPosition);
 
             _lastPosition = currentPosition;
         }

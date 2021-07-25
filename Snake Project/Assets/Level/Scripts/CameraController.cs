@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _followObject;
-    [SerializeField] private float _offsetX;
+    [SerializeField] private float _offsetZ;
+    [SerializeField] private float _startZ;
 
     private bool _isStop;
 
@@ -25,8 +26,11 @@ public class CameraController : MonoBehaviour
         if(_isStop)
             return;
 
+        if(_startZ > _followObject.position.z + _offsetZ)
+            return;
+
         Vector3 newPosition = transform.position;
-        newPosition.x = _followObject.position.x + _offsetX;
+        newPosition.z = _followObject.position.z + _offsetZ;
         transform.position = newPosition;
     }
 }

@@ -7,6 +7,8 @@ public class SnakeHead : SnakeSegment
     [Range(0, 90)] [SerializeField] private float _rotateAngle;
     [SerializeField] private float _rotateSpeed;
 
+    public bool isActive;
+
     private PlayerInput _input;
     private HingeJoint _joint;
     private Vector3 _currentAngle = Vector3.zero;
@@ -19,7 +21,7 @@ public class SnakeHead : SnakeSegment
 
     private void Update() 
     {
-        Vector3 newAngle = new Vector3(0, -_input.HorizontalMovement * _rotateAngle, 0);
+        Vector3 newAngle = new Vector3(0, _input.HorizontalMovement * _rotateAngle, 0);
         _currentAngle = Vector3.Lerp(_currentAngle, newAngle, Time.deltaTime * _rotateSpeed);
 
         transform.eulerAngles = _currentAngle;
@@ -27,6 +29,9 @@ public class SnakeHead : SnakeSegment
 
     private void LateUpdate()
     {
+        if (!isActive)
+            return;
+
         Path.Enqueue(transform.position);
     }
 }

@@ -1,36 +1,84 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeSpawner : MonoBehaviour
 {
-    [SerializeField] private SnakeSegment _bodyPartPrefab;
-    [SerializeField] private int _segmentsCount;
+    [SerializeField] private SnakeSegment _segmentPrefab;
+    
+    [SerializeField] private int _startSegmentsCount;
     [SerializeField] private float _offsetBetweenSegments;
     [SerializeField] private float _spawnDelay;
 
-    private Snake _snake;
+    private ISnakeSegments _snakeSegments;
+
+    public Action<SnakeSegment> SegmentAded;
 
     private void Start() 
     {
-        _snake = GetComponent<Snake>();
+        _snakeSegments = GetComponent<ISnakeSegments>();
 
-        SnakeSegment head =  GetComponentInChildren<SnakeHead>();
-        _snake.Segments.Add(head);
-
-        StartCoroutine(CreateBodyParts());
+        StartCoroutine(CreateStartSegments());
     }
 
-    private IEnumerator CreateBodyParts()
+    private void LateUpdate() 
     {
-        for (int i = 1; i <= _segmentsCount; i++)
+        if (Input.GetKeyDown("w"))
+        {
+            AddSegment();
+        }
+    }
+
+    private IEnumerator CreateStartSegments()
+    {
+        yield return new WaitForSeconds(_spawnDelay);
+        _snakeSegments.Head.isActive = true;
+
+        for (int i = 0; i < _startSegmentsCount; i++)
         {
             yield return new WaitForSeconds(_spawnDelay);
 
-            Vector3 spawnPosition = _snake.Segments[i - 1].transform.position + new Vector3(_offsetBetweenSegments, 0, 0);
-            SnakeSegment newSegment = Instantiate(_bodyPartPrefab, spawnPosition, Quaternion.identity, transform);
-            _snake.Segments.Add(newSegment);
+            if(i == 0)
+                yield return new WaitForSeconds(_spawnDelay);
+
+            AddSegment();
         }
+    }
+
+    private void AddSegment()
+    {
+        _snakeSegments.TailEnd.IsActive = false;
+
+        _snakeSegments.Segments.Add(Instantiate(_segmentPrefab, transform));
+        SetSegmentsPositions();
+
+        StartCoroutine(SetTailEnd());
+    }
+
+    private IEnumerator SetTailEnd()
+    {
+        yield return new WaitForSeconds(_spawnDelay);
+        _snakeSegments.TailEnd.IsActive = true;
+    }
+
+    private void SetSegmentsPositions()
+    {
+        SnakeSegment previousSegment = _snakeSegments.Head;
+
+        foreach (SnakeSegment segment in _snakeSegments.Segments)
+        {
+            SetPosition(previousSegment, segment);
+            previousSegment = segment;
+        }
+
+        SetPosition(previousSegment, _snakeSegments.TailEnd);
+    }
+
+    private void SetPosition(SnakeSegment previousSegment, SnakeSegment currentSegment)
+    {
+        Vector3 position = previousSegment.transform.position + new Vector3(0, 0, _offsetBetweenSegments);
+        currentSegment.transform.position = position;
     }
 
 

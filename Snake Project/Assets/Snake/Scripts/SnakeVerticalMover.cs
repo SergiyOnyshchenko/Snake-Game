@@ -8,7 +8,7 @@ public class SnakeVerticalMover : MonoBehaviour
 
     private void Update() 
     {
-        Vector3 movement = new Vector3(_speed, 0, 0);
+        Vector3 movement = new Vector3(0, 0, _speed);
         transform.Translate(movement * Time.deltaTime, Space.World);
     }
 }
