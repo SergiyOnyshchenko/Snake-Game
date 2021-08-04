@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Snake : MonoBehaviour, ISnakeSegments, IColor, IColorChanger
+public class Snake : MonoBehaviour, ISnakeSegments, IColor, IColorChanger, IDeath
 {
     [SerializeField] private SnakeHead _head;
     [SerializeField] private SnakeTailEnd _tailEnd;
     [SerializeField] private ColorData _currentColor;
+    [SerializeField] private ColorData _deathColor;
 
     private List<SnakeSegment> _segments = new List<SnakeSegment>();
 
@@ -17,10 +18,23 @@ public class Snake : MonoBehaviour, ISnakeSegments, IColor, IColorChanger
     public ColorData CurrentColor { get => _currentColor;}
 
     public event Action<ColorData> ColorChanged;
+    public event Action IsDied;
 
     public void ChangeColor(ColorData color)
     {
         _currentColor = color;
+        SetSegmentsColor(color);
+    }
+
+    public void SetSegmentsColor(ColorData color)
+    {
         ColorChanged?.Invoke(color);
+    }
+
+    public void Die()
+    {
+        IsDied?.Invoke();
+        ChangeColor(_deathColor);
+        EZCameraShake.CameraShaker.Instance.ShakeHard();
     }
 }

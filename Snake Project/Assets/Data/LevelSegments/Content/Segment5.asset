@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac00e370376aa054b9547431e20cc001, type: 3}
+  m_Name: Segment5
+  m_EditorClassIdentifier: 
+  _spawnPositionMultiplier: {x: 1, y: 1}
+  _row:
+  - _column:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 1a90f03f7745ccc4b9cc930aa695a10e, type: 2}
+    - {fileID: 0}
+  - _column:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: e1c77fbcc659759448f059bc393bbd82, type: 2}
+    - {fileID: 0}
+  - _column:
+    - {fileID: 11400000, guid: 7556b483d8996d54791ba9d909c4f9b9, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 1ee423038ca262f49bc6371b4f612b88, type: 2}
