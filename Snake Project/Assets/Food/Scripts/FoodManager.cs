@@ -46,7 +46,10 @@ public class FoodManager : MonoBehaviour, IFever
         GemAded?.Invoke(_gemAmount);
     }
 
-    public void StartFever(){}
+    public void StartFever()
+    {
+        
+    }
 
     public void EndFever()
     {

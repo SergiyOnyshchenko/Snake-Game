@@ -13,12 +13,12 @@ public class Fever : MonoBehaviour
     private IEnumerator _gemTimer;
     private int _gemCount = 0;
 
-    private void OnEnable() 
+    private void Start() 
     {
         FoodManager.Instance.GemAded += AddGem;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         FoodManager.Instance.GemAded -= AddGem;
     }

@@ -209,8 +209,8 @@ MonoBehaviour:
     type: 3}
   _startSegmentsCount: 8
   _activeSegmentsCount: 4
-  _offsetBetweenSegments: -0.4
-  _spawnDelay: 0.01
+  _offsetBetweenSegments: -0.35
+  _spawnDelay: 0.02
 --- !u!114 &8644766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,7 +1366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd158c332c36fb0448d2e5fca51971c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 11
+  _speed: 8
   _borderMultiplier: 8
 --- !u!65 &1002042804
 BoxCollider:

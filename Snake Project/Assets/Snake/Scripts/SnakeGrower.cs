@@ -16,12 +16,12 @@ public class SnakeGrower : MonoBehaviour
         _eatFoodCount = _eatFoodBeforeAddSegment;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         FoodManager.Instance.ColorFoodAded += CheckAddNewSegment;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         FoodManager.Instance.ColorFoodAded -= CheckAddNewSegment;
     }
