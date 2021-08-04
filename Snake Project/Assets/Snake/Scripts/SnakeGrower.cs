@@ -10,7 +10,7 @@ public class SnakeGrower : MonoBehaviour
     private int _eatFoodCount;
     private SnakeSegmentSpawner _spawner;
 
-    private void Start()
+    private void Awake() 
     {
         _spawner = GetComponent<SnakeSegmentSpawner>();
         _eatFoodCount = _eatFoodBeforeAddSegment;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColorFoodCountView : CountView
 {
-    private void Start()
+    private void Start() 
     {
         FoodManager.Instance.ColorFoodAded += SetCount;
     }

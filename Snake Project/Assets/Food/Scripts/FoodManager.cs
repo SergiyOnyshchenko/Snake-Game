@@ -4,21 +4,28 @@ using UnityEngine;
 using System;
 using UnityEngine.Events;
 
-public class FoodManager : IFever
+public class FoodManager : MonoBehaviour, IFever
 {
+    public static FoodManager Instance = null;
+
     private int _colorFoodAmount = 0;
     private int _gemAmount = 0;
-    private static FoodManager _instance = null;
 
     public event Action<int> ColorFoodAded;
     public event Action<int> GemAded;
 
-    public static FoodManager Instance{
-        get{
-            if (_instance == null)
-                _instance = new FoodManager();
-            return _instance;
-        }
+    private void Awake() 
+    {
+        if(Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
+    private void Start() 
+    {
+        GemAded?.Invoke(_gemAmount);
+        ColorFoodAded?.Invoke(_colorFoodAmount);
     }
 
     public void AddColorFood()
